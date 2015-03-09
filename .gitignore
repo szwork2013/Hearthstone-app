@@ -1,0 +1,7 @@
+npm-debug.log
+node_modules
+.idea
+config/env
+config/env/development.js
+config/env/production.js
+config/env/test.js
