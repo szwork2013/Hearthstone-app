@@ -6,6 +6,9 @@ module.exports = function(app) {
     app.route('/api/cards')
         .get(cards.list);
 
+    app.route('/api/cards/neutral')
+        .get(cards.neutralCardsList);
+
     app.route('/api/cards/:cardId')
         .get(cards.read);
 

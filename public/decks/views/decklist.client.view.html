@@ -1,0 +1,34 @@
+<section>
+   <!-- <div ng-show="dbCreate.errorMessage" class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <span data-ng-bind="dbCreate.errorMessage"></span>
+    </div>-->
+
+
+    <div ng-show="dbCreate.errorMessage">
+        <alert type="danger" close="dbCreate.closeAlert()">{{dbCreate.errorMessage}}</alert>
+    </div>
+
+
+    <h4>{{dbCreate.playerClass}}  {{dbCreate.deck.currCardCount}}/{{dbCreate.deck.max}} </h4>
+    <div class="deck-controls">
+ <!--           <input type="text" class="form-control" placeholder="Deck title" id="title" ng-model="dbCreate.deck.title" autofocus>
+            <ui-select ng-model="dbCreate.deck.decktype" theme="bootstrap" title="Choose a deck type">
+                <ui-select-match placeholder="Select deck type...">{{$select.selected}}</ui-select-match>
+                <ui-select-choices repeat="deck_type in dbCreate.deckTypes | filter: $select.search">
+                    <div ng-bind-html="deck_type"></div>
+                </ui-select-choices>
+            </ui-select>-->
+        <div>
+            <button class="btn btn-success" ng-click="dbCreate.saveDeck()">{{'SAVE' | translate}}</button>
+            <button class="btn btn-danger" ng-click="dbCreate.resetDeck()">{{'RESET' | translate}}</button>
+        </div>
+    </div>
+
+
+    <ul class="list-group">
+        <li class="list-group-item deckcard" ng-repeat="card in dbCreate.getDeckCardRows()" ng-click="dbCreate.removeCard(card)">
+            {{card.name}}<span class="badge">{{card.quan}}</span>
+        </li>
+    </ul>
+</section>

@@ -1,0 +1,30 @@
+<!-- list-cards.client.view.html -->
+<section>
+    <h2>Cards</h2>
+    <div class="filters">
+        <input placeholder="filter by attack" ng-model="vmCards.attackFilter" ng-change="vmCards.pageChanged()">
+        <input placeholder="filter by health" ng-model="vmCards.healthFilter" ng-change="vmCards.pageChanged()">
+        <input placeholder="filter by mechanics" ng-model="vmCards.mechanicsFilter" ng-change="vmCards.pageChanged()">
+        <input placeholder="filter by type" ng-model="vmCards.typeFilter" ng-change="vmCards.pageChanged()">
+        <input placeholder="filter by race" ng-model="vmCards.raceFilter" ng-change="vmCards.pageChanged()">
+        <input placeholder="filter by class" ng-model="vmCards.playerClassFilter" ng-change="vmCards.pageChanged()">
+        <input placeholder="filter by name" ng-model="vmCards.nameFilter" ng-change="vmCards.pageChanged()">
+        <input placeholder="filter by rarity" ng-model="vmCards.rarityFilter" ng-change="vmCards.pageChanged()">
+        <input placeholder="filter by manacost" ng-model="vmCards.manacostFilter" ng-change="vmCards.pageChanged()">
+    </div>
+
+    <div class="cards">
+        <div class="col-lg-3 col-md-6 col-xs-12" ng-repeat="card in vmCards.filteredCards">
+            <a ui-sref="card({cardId: card._id})">
+                <img ng-src="/cards/images/{{card.cardimage}}" width="160" height="228" alt="Image of {{card.name}}" />
+            </a>
+        </div>
+        <pagination
+                total-items="vmCards.totalCards"
+                ng-model="vmCards.currentPage"
+                ng-change="vmCards.pageChanged()"
+                boundary-links="true" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
+                max-size="vmCards.maxSize" rotate="false">
+        </pagination>
+    </div>
+</section>

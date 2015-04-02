@@ -1,0 +1,7 @@
+<!-- The card view -->
+<section data-ng-init="vmCards.findOne()">
+    <img ng-src="/cards/images/{{vmCards.card.cardimage}}" alt="Image of {{vmCards.card.name}}"/>
+    <h1 data-ng-bind="vmCards.card.name"></h1>
+    <p data-ng-bind="vmCards.card.type"></p>
+    <p data-ng-bind="vmCards.card.rarity"></p>
+</section>

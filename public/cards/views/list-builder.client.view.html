@@ -1,0 +1,62 @@
+<section>
+    <h2>Cards</h2>
+    <div class="row">
+        <div class="filters">
+           <!-- <ui-select ng-change="builder.neutralPageChanged()" tagging tagging-label="('new')" ng-model="builder.rarityFilter" theme="bootstrap" style="width: 300px;" title="Choose a color">
+                <ui-select-match placeholder="Select rarity...">{{$select.selected}}</ui-select-match>
+                <ui-select-choices repeat="rarity in builder.rarity">
+                    <div ng-bind-html="rarity"></div>
+                </ui-select-choices>
+            </ui-select>-->
+            <input placeholder="filter by attack" ng-model="builder.attackFilter" ng-change="builder.pageChanged()">
+            <input placeholder="filter by health" ng-model="builder.healthFilter" ng-change="builder.pageChanged()">
+            <input placeholder="filter by type" ng-model="builder.typeFilter" ng-change="builder.pageChanged()">
+            <input placeholder="filter by race" ng-model="builder.raceFilter" ng-change="builder.pageChanged()">
+            <input placeholder="filter by name" ng-model="builder.nameFilter" ng-change="builder.pageChanged()">
+            <input placeholder="filter by rarity" ng-model="builder.rarityFilter" ng-change="builder.pageChanged()">
+            <input placeholder="filter by manacost" ng-model="builder.manacostFilter" ng-change="builder.pageChanged()">
+        </div>
+    </div>
+
+    <tabset justified="true">
+        <tab heading="Class Cards">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-xs-12 card" ng-repeat="card in builder.filteredClassCards">
+                    <a href="" ng-click="builder.addCard(card)">
+                        <img ng-src="/cards/images/{{card.cardimage}}" width="160" height="228" alt="Image of {{card.name}}" />
+                    </a>
+                    <a class="btn btn-primary btn-block" ui-sref="card({cardId: card._id})">Detail</a>
+                </div>
+            </div>
+            <div class="row">
+                <pagination
+                    total-items="builder.totalClassCards+8"
+                    ng-model="builder.currentClassPage"
+                    ng-change="builder.classPageChanged()"
+                    boundary-links="true" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
+                    max-size="builder.maxSize"
+                    rotate="false">
+                </pagination>
+            </div>
+        </tab>
+        <tab heading="Neutral Cards">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-xs-12 card" ng-repeat="card in builder.filteredNeutralCards">
+                    <a href="" ng-click="builder.addCard(card)">
+                        <img ng-src="/cards/images/{{card.cardimage}}" width="160" height="228" alt="Image of {{card.name}}" />
+                    </a>
+                    <a class="btn btn-primary btn-block" ui-sref="card({cardId: card._id})">Detail</a>
+                </div>
+            </div>
+            <div class="row">
+                <pagination
+                    total-items="builder.totalNeutralCards+50"
+                    ng-model="builder.currentNeutralPage"
+                    ng-change="builder.neutralPageChanged()"
+                    boundary-links="true" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
+                    max-size="builder.maxSize" rotate="false">
+                </pagination>
+            </div>
+        </tab>
+    </tabset>
+</section>

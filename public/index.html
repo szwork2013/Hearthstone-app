@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Heartstone-app</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="/vendor/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/vendor/angular-ui-select/dist/select.css"/>
+    <script type="text/javascript" src="/vendor/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="/vendor/bootstrap/js/dropdown.js"></script>
+    <script type="text/javascript" src="/vendor/bootstrap/js/alert.js"></script>
+
+    <style>
+        body {
+            padding-top: 60px;
+            padding-bottom: 40px;
+        }
+        .card, .deckcard{
+            cursor: pointer;
+        }
+
+        .form-signin
+        {
+            max-width: 330px;
+            padding: 15px;
+            margin: 0 auto;
+        }
+        .form-signin .form-signin-heading, .form-signin .checkbox
+        {
+            margin-bottom: 10px;
+        }
+        .form-signin .checkbox
+        {
+            font-weight: normal;
+        }
+        .form-signin .form-control
+        {
+            position: relative;
+            font-size: 16px;
+            height: auto;
+            padding: 10px;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+        .form-signin .form-control:focus
+        {
+            z-index: 2;
+        }
+        .form-signin input[type="text"]
+        {
+            margin-bottom: -1px;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        .form-signin input[type="password"]
+        {
+            margin-bottom: 10px;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+        }
+        .account-wall
+        {
+            margin-top: 20px;
+            padding: 40px 0px 20px 0px;
+            background-color: #f7f7f7;
+            -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+            -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+            box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        }
+        .login-title
+        {
+            color: #555;
+            font-size: 18px;
+            font-weight: 400;
+            display: block;
+        }
+        .profile-img
+        {
+            width: 96px;
+            height: 96px;
+            margin: 0 auto 10px;
+            display: block;
+            -moz-border-radius: 50%;
+            -webkit-border-radius: 50%;
+            border-radius: 50%;
+        }
+        .need-help
+        {
+            margin-top: 10px;
+        }
+        .new-account {
+            display: block;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body ng-controller="MainController as MainCtrl">
+    <header>
+        <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" ui-sref="home">Hearthstone-app</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a ui-sref="cards">Cards</a></li>
+                        <li><a ui-sref="decks">Decks</a></li>
+                        <!-- Deck Builder Menu -->
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">New Deck <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a ui-sref="deckbuilder.create({playerClass: 'Druid'})">Druid</a></li>
+                                <li><a ui-sref="deckbuilder.create({playerClass: 'Hunter'})">Hunter</a></li>
+                                <li><a ui-sref="deckbuilder.create({playerClass: 'Mage'})">Mage</a></li>
+                                <li><a ui-sref="deckbuilder.create({playerClass: 'Paladin'})">Paladin</a></li>
+                                <li><a ui-sref="deckbuilder.create({playerClass: 'Priest'})">Priest</a></li>
+                                <li><a ui-sref="deckbuilder.create({playerClass: 'Rogue'})">Rogue</a></li>
+                                <li><a ui-sref="deckbuilder.create({playerClass: 'Shaman'})">Shaman</a></li>
+                                <li><a ui-sref="deckbuilder.create({playerClass: 'Warlock'})">Warlock</a></li>
+                                <li><a ui-sref="deckbuilder.create({playerClass: 'Warrior'})">Warrior</a></li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                    <!-- User account -->
+                    <ul class="nav navbar-nav navbar-right">
+                        <li ng-hide="user"><a ui-sref="signup">Sign Up</a></li>
+                        <li ng-hide="user"><a ui-sref="signin">Sign In</a></li>
+                        <li ng-show="user" class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" >{{user.email}} <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a  href="" ng-click="signout()"><span class="glyphicon glyphicon-off"></span> Sign out</a>
+                                    <!--ng-click="signout()"-->
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <!-- /User account -->
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <section ui-view></section>
+    </div>
+
+
+    <script type="text/javascript" src="/vendor/angular/angular.js"></script>
+    <!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular.js"></script>-->
+    <script type="text/javascript" src="/vendor/angular-ui-router/release/angular-ui-router.js"></script>
+    <script type="text/javascript" src="/vendor/angular-route/angular-route.js"></script>
+    <script type="text/javascript" src="/vendor/angular-resource/angular-resource.js"></script>
+    <!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.12.1/ui-bootstrap.js"></script>-->
+    <!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.12.1/ui-bootstrap-tpls.js"></script>-->
+    <script type="text/javascript" src="/vendor/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script type="text/javascript" src="/vendor/angular-jwt/dist/angular-jwt.js"></script>
+    <script type="text/javascript" src="/vendor/angular-ui-select/dist/select.js"></script>
+    <script type="text/javascript" src="/vendor/angular-sanitize/angular-sanitize.js"></script>
+    <script type="text/javascript" src="/vendor/angular-translate/angular-translate.js"></script>
+
+    <!-- Main module -->
+    <script type="text/javascript" src="/main/main.client.module.js"></script>
+    <script type="text/javascript" src="/main/config/main.client.constants.js"></script>
+    <script type="text/javascript" src="/main/main.client.routes.js"></script>
+    <script type="text/javascript" src="/main/main.client.controller.js"></script>
+    <script type="text/javascript" src="/main/authtoken.client.factory.js"></script>
+    <!-- Users module -->
+    <script type="text/javascript" src="/users/users.client.module.js"></script>
+    <!--<script type="text/javascript" src="/users/config/users.client.constants.js"></script>-->
+    <script type="text/javascript" src="/users/config/users.client.interceptors.js"></script>
+    <script type="text/javascript" src="/users/config/users.client.routes.js"></script>
+    <script type="text/javascript" src="/users/controllers/users.client.controller.js"></script>
+    <script type="text/javascript" src="/users/services/users.client.interceptor.js"></script>
+    <script type="text/javascript" src="/users/services/users.client.service.js"></script>
+    <!-- Cards module -->
+    <script type="text/javascript" src="/cards/cards.client.module.js"></script>
+    <script type="text/javascript" src="/cards/controllers/cards.client.controller.js"></script>
+    <script type="text/javascript" src="/cards/controllers/builder.client.controller.js"></script>
+    <script type="text/javascript" src="/cards/services/cards.client.service.js"></script>
+    <script type="text/javascript" src="/cards/services/cards-store.client.service.js"></script>
+    <script type="text/javascript" src="/cards/config/cards.client.routes.js"></script>
+    <!-- Decks module -->
+    <script type="text/javascript" src="/decks/decks.client.module.js"></script>
+    <script type="text/javascript" src="/decks/directives/deck.client.directive.js"></script>
+    <script type="text/javascript" src="/decks/create/deckbuilder.create.client.module.js"></script>
+    <script type="text/javascript" src="/decks/create/deckbuilder.create.client.contoller.js"></script>
+    <script type="text/javascript" src="/decks/edit/deckbuilder.edit.client.module.js"></script>
+    <script type="text/javascript" src="/decks/edit/deckbuilder.edit.client.controller.js"></script>
+    <script type="text/javascript" src="/decks/controllers/decks.client.controller.js"></script>
+    <script type="text/javascript" src="/decks/services/decks.client.service.js"></script>
+    <script type="text/javascript" src="/decks/services/deck-builder.client.service.js"></script>
+    <script type="text/javascript" src="/decks/config/decks.client.routes.js"></script>
+
+    <script type="text/javascript" src="/app.js"></script>
+</body >
+</html>

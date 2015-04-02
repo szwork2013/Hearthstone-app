@@ -1,0 +1,21 @@
+<section class="col-lg-12">
+    <h2>Deck Stats</h2>
+    <div>
+        Minions {{dbCreate.deck.typeCardStats.minions}}
+        Spells {{dbCreate.deck.typeCardStats.spells}}
+        Weapons {{dbCreate.deck.typeCardStats.weapons}}
+    </div>
+    <ul ng-repeat="mechanic in dbCreate.deck.mechanicsCardStats">
+        <li>{{mechanic.quan}} - {{mechanic.mech}}</li>
+    </ul>
+
+    <div>
+        <p>0 mana {{dbCreate.calcManacost(0)}}</p>
+        <p>1 mana {{dbCreate.calcManacost(1)}}</p>
+        <p>2 mana {{dbCreate.calcManacost(2)}}</p>
+        <p>3 mana {{dbCreate.calcManacost(3)}}</p>
+        <p>4 mana {{dbCreate.calcManacost(4)}}</p>
+        <p>5 mana {{dbCreate.calcManacost(5)}}</p>
+        <p>6 mana {{dbCreate.calcManacost(6)}}</p>
+    </div>
+</section>

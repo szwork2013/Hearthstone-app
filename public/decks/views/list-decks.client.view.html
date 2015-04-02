@@ -1,0 +1,27 @@
+<!-- list-decks.client.view.html -->
+<section data-ng-controller="DecksController as DecksCtrl">
+    <h1>All Decks</h1>
+    <div class="row">
+        <div class="col-xs-4" ng-repeat="deck in DecksCtrl.decks | orderBy:'-_id'">
+<!--            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h5 class="deckTitle panel-title">
+                        <img src="/decks/images/{{deck.playerClass}}.png" width="36px" height="36px" alt="Image of {{deck.playerClass}}"/>
+                        <a ui-sref="deck({deckId: deck._id})">{{deck._id}}</a>
+                    </h5>
+                </div>
+                <div class="panel-body">
+                    <div class="deckType"><h5>Type: {{deck.deckType}} Cost: {{deck.deckCost}}</h5></div>
+                    <div class="stats">
+                        <h6>Minions: {{deck.typeCardStats.minions}}</h6>
+                        <h6>Spells: {{deck.typeCardStats.spells}}</h6>
+                        <h6>Weapons: {{deck.typeCardStats.weapons}}</h6>
+                    </div>
+                    <h5>Author: {{deck.creator.email}} | Patch: {{deck.patch}}</h5>
+                </div>
+            </div>-->
+            <hsdeck deck="deck"></hsdeck>
+        </div>
+    </div>
+</section>
+

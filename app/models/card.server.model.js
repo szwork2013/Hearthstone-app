@@ -1,5 +1,6 @@
 'use strict';
 
+// Load the module dependencies
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
@@ -9,7 +10,13 @@ var CardSchema = new Schema({
     name        : String,
     text        : String,
 
-    playerClass : String,
+    playerClass : {
+        type: String,
+        enum: ['Druid', 'Hunter',
+        'Mage', 'Paladin',
+        'Priest', 'Rouge',
+        'Shaman', 'Warlock',
+        'Warrior'] },
 
     type        : String,
     rarity      : String,

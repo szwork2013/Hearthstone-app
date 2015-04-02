@@ -1,0 +1,38 @@
+<!-- view-deck.client.view -->
+<section data-ng-controller="DecksController as DecksCtrl" data-ng-init="DecksCtrl.findOne()">
+    <h1 data-ng-bind="DecksCtrl.deck.title"></h1>
+    <div class="row">
+        <section class="col-lg-9">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-xs-12" ng-repeat="card in DecksCtrl.deck.cards">
+                    <img ng-src="/cards/images/{{card.cardId.cardimage}}" width="160" height="228" alt="Image of {{card.cardId.name}}" />
+                </div>
+            </div>
+
+        </section>
+        <section class="decklist col-lg-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h6 class="deckTitle panel-title">
+                        {{DecksCtrl.deck._id}}
+                    </h6>
+                </div>
+                <div class="panel-body">
+
+                    <p>Class: {{DecksCtrl.deck.playerClass}}</p>
+                    <p>Author: {{DecksCtrl.deck.creator.email}}</p>
+                    <p>Patch: {{DecksCtrl.deck.patch}}</p>
+                    <p>Type: {{DecksCtrl.deck.type}}</p></div>
+            </div>
+
+
+            <h4>{{DecksCtrl.playerClass}}</h4>
+            <ul class="list-group">
+                <li class="list-group-item" ng-repeat="card in DecksCtrl.deck.cards" >
+                    <span >{{card.cardId.name}}</span><span class="badge">{{card.quan}}</span>
+                    <!--<div ng-src="/cards/images/{{card.cardId.cardimage}}">asdasdasdasd</div>-->
+                </li>
+            </ul>
+        </section>
+    </div>
+</section>

@@ -1,0 +1,8 @@
+<div class="deck-controls">
+     <ui-select ng-change="" ng-model="" theme="bootstrap" title="Choose a deck type">
+         <ui-select-match placeholder="Select deck type...">{{$select.selected}}</ui-select-match>
+         <ui-select-choices repeat="deck_type in dbCreate.deckTypes">
+             <div ng-bind-html="deck_type"></div>
+         </ui-select-choices>
+     </ui-select>
+</div>
